@@ -1,0 +1,114 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <title></title>
+<style id="system" type="text/css">h1,h2,h3,h4,h5,h6,p,blockquote {    margin: 0;    padding: 0;}body {    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;    font-size: 13px;    line-height: 18px;    color: #737373;    margin: 10px 13px 10px 13px;}a {    color: #0069d6;}a:hover {    color: #0050a3;    text-decoration: none;}a img {    border: none;}p {    margin-bottom: 9px;}h1,h2,h3,h4,h5,h6 {    color: #404040;    line-height: 36px;}h1 {    margin-bottom: 18px;    font-size: 30px;}h2 {    font-size: 24px;}h3 {    font-size: 18px;}h4 {    font-size: 16px;}h5 {    font-size: 14px;}h6 {    font-size: 13px;}hr {    margin: 0 0 19px;    border: 0;    border-bottom: 1px solid #ccc;}blockquote {    padding: 13px 13px 21px 15px;    margin-bottom: 18px;    font-family:georgia,serif;    font-style: italic;}blockquote:before {    content:"C";    font-size:40px;    margin-left:-10px;    font-family:georgia,serif;    color:#eee;}blockquote p {    font-size: 14px;    font-weight: 300;    line-height: 18px;    margin-bottom: 0;    font-style: italic;}code, pre {    font-family: Monaco, Andale Mono, Courier New, monospace;}code {    background-color: #fee9cc;    color: rgba(0, 0, 0, 0.75);    padding: 1px 3px;    font-size: 12px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;    border-radius: 3px;}pre {    display: block;    padding: 14px;    margin: 0 0 18px;    line-height: 16px;    font-size: 11px;    border: 1px solid #d9d9d9;    white-space: pre-wrap;    word-wrap: break-word;}pre code {    background-color: #fff;    color:#737373;    font-size: 11px;    padding: 0;}@media screen and (min-width: 768px) {    body {        width: 748px;        margin:10px auto;    }}</style><style id="custom" type="text/css"></style></head>
+<body marginheight="0"><h2>tsRFinder</h2>
+<p>
+
+</p>
+
+<h2>Requirements:</h2>
+<ul>
+<li>Linux system, enough disk space and Ram depending on the size of RNA deep sequencing data. (Tested system: ubuntu 12.04 LTS,
+ubuntu 16.04 LTS)</li>
+</ul>
+<h2>Installation</h2>
+<ul>
+<li>Download tsRFinder pipeline package from https://github.com/zhlingl/tsRFun<pre><code>wget https://github.com/zhlingl/tsRFun/archive/refs/heads/main.zip</code></pre>
+</li>
+<li><p>Download necessary software, packages and reference databases as listed below:</p>
+<ul>
+<li>Perl 5 (<a href="https://www.perl.org">https://www.perl.org</a>) (Tested version: v5.14.2, v5.22.1); Perl 5 might be already installed in the linux system.</li>
+<li>Bowtie [1] (<a href="http://bowtie-bio.sourceforge.net/index.shtml">http://bowtie-bio.sourceforge.net/index.shtml</a>) (Tested version: 1.1.1, 1.2.1.1)</li>
+<li>Bedtools(<a href="https://bedtools.readthedocs.io/en/latest/">https://bedtools.readthedocs.io/en/latest/</a>) (Tested version: 2.25.0, 2.29.2)</li>
+<li>Samtools(<a href="http://www.htslib.org/)(">http://www.htslib.org/)(</a> Tested version:1.9,1.13)</li>
+<li>Reference database (See lists and download link of all pre-compiled species’ databases in Pre-compiled Databases Instruction)</li>
+</ul>
+</li>
+<li><p>Download tsRFinder pipeline package</p>
+<ul>
+<li>Install tsRFinder from https://github.com/zhlingl/tsRFun<ul>
+<li>Unpack tsRFinder package<pre><code>unzip tsRFun-master.zip</code></pre>
+</li>
+<li>Attach the tsRFinder directory to your PATH:<pre><code>echo 'export PATH=$PATH:your_path_to_tsRFun-master/tsRFinder' &gt;&gt; ~/.bashrc.
+chmod 755 your_path_to_tsRFun-master/tsRFinder/tsRFinder.pl</code></pre>
+</li>
+</ul>
+</li>
+<li>Install Bowtie<ul>
+<li>Unpack bowtie-1.x.x-linux-x86_64.zip.<pre><code>unzip bowtie-1.x.x-linux-x86_64.zip</code></pre>
+</li>
+<li>Attach the bowtie directory to your PATH:<pre><code>echo 'export PATH=$PATH:your_path_to_bowtie' &gt;&gt; ~/.bashrc           chmod 755 your_path_to_ tsRFun-master/source/ tsRFun.pl</code></pre>
+</li>
+<li>Start a new shell session to apply changes to environment variables:<pre><code>source ~/.bashrc</code></pre>
+</li>
+</ul>
+</li>
+<li>Install bedtools<ul>
+<li>Unpack bedtools-2.25.0.tar.gz.<pre><code>wget https://github.com/arq5x/bedtools2/archive/v2.25.0.tar.gz
+tar xzvf v2.25.0 
+cd bedtools2-2.25.0/
+make
+cd bin/</code></pre>
+</li>
+<li>Attach the bedtools directory to your PATH:<pre><code>echo 'export PATH=$PATH:your_path_to_bedtools' &gt;&gt; ~/.bashrc</code></pre>
+</li>
+<li>Start a new shell session to apply changes to environment variables:<pre><code>source ~/.bashrc</code></pre>
+</li>
+</ul>
+</li>
+<li>Install samtools<ul>
+<li>Unpack bedtools-2.25.0.tar.gz.<pre><code>wget -c https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2
+tar jxvf samtools-1.9.tar.bz2
+cd samtools-1.9/
+./configure --prefix= your_path_of_samtools(example: /home/vip47/biosoft/samtools-1.9)
+make
+make install</code></pre>
+</li>
+<li>Attach the samtools directory to your PATH:<pre><code>echo 'export PATH=$PATH:your_path_to_ samtools' &gt;&gt; ~/.bashrc</code></pre>
+</li>
+<li>Start a new shell session to apply changes to environment variables:<pre><code>source ~/.bashrc</code></pre>
+</li>
+</ul>
+</li>
+<li>Install perl modules<pre><code>  cpan -i Net::Server;
+  cpan -i Getopt::Std;
+  cpan -i File::Find;
+  cpan -i File::Basename;
+  cpan -i Cwd;
+  cpan -i Math::CDF;
+  cpan -i FileHandle;</code></pre>
+</li>
+</ul>
+</li>
+<li>Download tsRFinder pipeline package<ul>
+<li>Test if everything is installed properly:<pre><code>   perl -v
+   tsRFinder.pl -h
+   bowtie 
+   samtools
+   bedtools</code></pre>
+</li>
+</ul>
+</li>
+<li>If you get any error messages you should install the software or perl modules once again.<h2>Script description</h2>
+</li>
+<li><p>The input files of tsRFinder.pl are:</p>
+<pre><code>  Options:
+    -i &lt;file&gt;    Input could be: .fastq/.fq or .fasta/.fa file. 
+    -o&lt;file&gt;    Output address of annotation results
+    -t &lt;int&gt;    Number of threads to launch (default = 4)
+    -x &lt;str&gt;    Address of bowtie index tRNA information 
+
+  Alignment:
+    -l &lt;int&gt;    The minimal length of the output sequences (default = 15)
+    -L &lt;int&gt;    The maximal length of the output sequences (default = 45)
+    -M &lt;int&gt;    The total number of mismatches in the entire alignment (default = 0)
+    -p &lt;float&gt;    The p-value threshold to determine whether the fragment is tsRNA.
+  Others:
+    -v        Print version information
+    -h        Print this usage message</code></pre>
+<h2>Example of use:</h2>
+<pre><code>tsRFinder.pl -i PATH_of_example/fasta -o PATH_of_example/ -x hg38_index/</code></pre>
+</li>
+</ul>
+</body></html>

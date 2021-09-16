@@ -1,0 +1,116 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <title></title>
+<style id="system" type="text/css">h1,h2,h3,h4,h5,h6,p,blockquote {    margin: 0;    padding: 0;}body {    font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;    font-size: 13px;    line-height: 18px;    color: #737373;    margin: 10px 13px 10px 13px;}a {    color: #0069d6;}a:hover {    color: #0050a3;    text-decoration: none;}a img {    border: none;}p {    margin-bottom: 9px;}h1,h2,h3,h4,h5,h6 {    color: #404040;    line-height: 36px;}h1 {    margin-bottom: 18px;    font-size: 30px;}h2 {    font-size: 24px;}h3 {    font-size: 18px;}h4 {    font-size: 16px;}h5 {    font-size: 14px;}h6 {    font-size: 13px;}hr {    margin: 0 0 19px;    border: 0;    border-bottom: 1px solid #ccc;}blockquote {    padding: 13px 13px 21px 15px;    margin-bottom: 18px;    font-family:georgia,serif;    font-style: italic;}blockquote:before {    content:"C";    font-size:40px;    margin-left:-10px;    font-family:georgia,serif;    color:#eee;}blockquote p {    font-size: 14px;    font-weight: 300;    line-height: 18px;    margin-bottom: 0;    font-style: italic;}code, pre {    font-family: Monaco, Andale Mono, Courier New, monospace;}code {    background-color: #fee9cc;    color: rgba(0, 0, 0, 0.75);    padding: 1px 3px;    font-size: 12px;    -webkit-border-radius: 3px;    -moz-border-radius: 3px;    border-radius: 3px;}pre {    display: block;    padding: 14px;    margin: 0 0 18px;    line-height: 16px;    font-size: 11px;    border: 1px solid #d9d9d9;    white-space: pre-wrap;    word-wrap: break-word;}pre code {    background-color: #fff;    color:#737373;    font-size: 11px;    padding: 0;}@media screen and (min-width: 768px) {    body {        width: 748px;        margin:10px auto;    }}</style><style id="custom" type="text/css"></style></head>
+<body marginheight="0"><h2>tsRTarget</h2>
+<p>
+
+</p>
+
+<h2>Requirements:</h2>
+<ul>
+<li>Linux system, enough disk space and Ram depending on the size of RNA deep sequencing data. (Tested system: ubuntu 12.04 LTS,
+ubuntu 16.04 LTS)</li>
+</ul>
+<h2>Installation</h2>
+<ul>
+<li>Download tsRTarget pipeline package from https://github.com/zhlingl/tsRFun <pre><code>wget https://github.com/zhlingl/tsRFun/archive/refs/heads/main.zip</code></pre>
+</li>
+<li><p>Download necessary software, packages and reference databases as listed below:</p>
+<ul>
+<li>The CLIP Tool Kit (CTK) (<a href="https://zhanglab.c2b2.columbia.edu/index.php/CTK_Documentation">https://zhanglab.c2b2.columbia.edu/index.php/CTK_Documentation</a>Tested version:1.1.3) </li>
+<li>RNAhybrid (<a href="https://bibiserv.cebitec.uni-bielefeld.de/rnahybrid/">https://bibiserv.cebitec.uni-bielefeld.de/rnahybrid/</a>)</li>
+<li>BLAST(<a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">https://blast.ncbi.nlm.nih.gov/Blast.cgi)(</a> Tested version:2.10.1)</li>
+<li>Reference database (See lists and download link of all pre-compiled species’ databases in Pre-compiled Databases Instruction)</li>
+</ul>
+</li>
+<li><p>Download tsRTarget pipeline package</p>
+<ul>
+<li>Install tsRTarget from https://github.com/zhlingl/tsRFun <ul>
+<li>Unpack tsRTarget package<pre><code> unzip main.zip</code></pre>
+</li>
+<li>Attach the tsRTarget directory to your PATH:<pre><code>echo 'export PATH=$PATH:your_path_to_tsRFun-master/tsRTarget' &gt;&gt; ~/.bashrc.
+chmod 755 your_path_to_tsRTarget-master/tsRTarget/tsRTarget.sh</code></pre>
+</li>
+</ul>
+</li>
+<li>Install CTK<ul>
+<li>Unpack czplib-1.0.x.zip<pre><code>unzip czplib-1.0.x.zip
+mv czplib-1.0.x /usr/local/lib/czplib
+</code></pre>
+</li>
+<li>Add the library path to the environment variable, so perl can find it.<pre><code>export PERL5LIB=your_path_to_czplib</code></pre>
+</li>
+<li>Download CTK code and likewise decompress and move to whatever directory you like (as an example, we use /usr/local/)<pre><code>unzip ctk-1.0.x.zip
+mv ctk-1.0.x /usr/local/CTK</code></pre>
+</li>
+<li>Attach the CTK directory to your PATH:<pre><code>echo 'export PATH=$PATH:your_path_to_CTK'</code></pre>
+</li>
+</ul>
+</li>
+<li>Install RNAhybrid<ul>
+<li>Unpack RNAhybrid-2.1.2.tar.gz.<pre><code>wget https://bibiserv.cebitec.uni-bielefeld.de/applications/rnahybrid/resources/downloads/RNAhybrid-2.1.2.tar.gz
+tar -xzvf RNAhybrid-2.1.2.tar.gz
+cd /path/to/ RNAhybrid-2.1.2
+./configure 
+make  
+make install
+cd bin/</code></pre>
+</li>
+<li>Attach the bedtools directory to your PATH:<pre><code>echo 'export PATH=$PATH:your_path_to_RNAhybrid' &gt;&gt; ~/.bashrc</code></pre>
+</li>
+<li>Start a new shell session to apply changes to environment variables:<pre><code>source ~/.bashrc</code></pre>
+</li>
+</ul>
+</li>
+<li>Install BLAST<ul>
+<li>Unpack ncbi-blast-2.10.1+-x64-linux.tar.gz from https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/.<pre><code>tar -zxvf ncbi-blast-2.10.1+-x64-linux.tar.gz
+</code></pre>
+</li>
+<li>Attach the samtools directory to your PATH:<pre><code>echo 'export PATH=$PATH:your_path_to_BLAST' &gt;&gt; ~/.bashrc</code></pre>
+</li>
+<li>Start a new shell session to apply changes to environment variables:<pre><code>source ~/.bashrc</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Download tsRFun pipeline package<ul>
+<li>Test if everything is installed properly:<pre><code>   perl -v
+   bash tsRTargt.sh -h
+   ctk -h 
+   RNAhybrid -h
+   blastn -h</code></pre>
+</li>
+</ul>
+</li>
+<li>If you get any error messages you should install the software or perl modules once again.<h2>Script description</h2>
+</li>
+<li><p>The input files of tsRTarget.sh are:</p>
+<pre><code>  Options:
+    -i &lt;inputfile&gt;	Input could be:                                                                    
+		  a .fastq/.fq or .fasta/.fa file.                                                             
+    -t data type clear/clash or CLIP (iclip/eclip/par-clip/hits-clip)                                  
+    -o outputdir  address of annotation results                                                        
+    -a index_adress                                                                                    
+    -m mismatch  default=1                                                                             
+    -w min tsRNA_length word_size default=14                                                           
+    -n max tsRNA_length word_size default=40                                                           
+    -g min target_length  default=10                                                                   
+    -h max -g min target_length default(70 for clear clash data; 140 for clip data)                    
+    -s matched-length  default=6                                                                       
+    -e gapopen	default=1                                                                              
+    -P Collapse PCR duplicates default=T                                                               
+    -S seed T/N  default=T                                                                             
+    -R seed start default=2                                                                            
+    -E seed end default=8                                                                              
+    -M Min Free Energy  default=-10                                                                    
+    -c match_clip the word_size of RNA-RNA target; only used for CLIP seq data,                        
+Others:                                                                                                
+    -h		print this usage message                                                                   
+<h2>Example of use:</h2>
+<pre><code>bash tsRTarget.sh -i example.fa -t clear -o example_result -a hg38_index                           
+</code></pre>
+</li>
+</ul>
+</body></html>
