@@ -162,3 +162,14 @@
 tsRFinder.pl -i PATH_of_example/fasta -o PATH_of_example/ -x hg38_index/
 ```
 
+# Output file:  
+
+The information columns of the output file are as follows:
+
+1. Type of tsRNA, such as tRF-3, tRF-5, and so on.
+2. RPM (Reads Per Million) value of the tsRNA.
+3. AlignScore value.
+4. Length of the tsRNA.
+5. tRNA from which the tsRNA originates.
+6. Position of the tsRNA on its source tRNA.
+7. Sequence of the tsRNA.
